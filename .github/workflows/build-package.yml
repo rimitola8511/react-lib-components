@@ -1,0 +1,27 @@
+name: On Build
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+    name: Node.js ${{ matrix.node-version }} - ${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://npm.pkg.github.com/
+      - name: Run npm clean install
+        run: npm ci
+      # uncomment when google fix the @google-cloud/logging errors
+      # - name: Run npm security audit
+      #   run: npm audit --production --audit-level=moderate
+      - name: Run npm build
+        run: npm run rollup

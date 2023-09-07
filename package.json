@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/rimitola8511"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An example component library for react /learning",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

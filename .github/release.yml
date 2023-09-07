@@ -4,7 +4,7 @@ changelog:
     labels:
       - ignore-for-release
     authors:
-      - RTicardo Imitola
+      - Ricardo Imitola
   categories:
     - title: Breaking Changes 🛠
       labels:

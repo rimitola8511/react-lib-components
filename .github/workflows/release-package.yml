@@ -1,4 +1,4 @@
-name: On Release
+name: Node.js Package
 
 on:
   release:
@@ -7,29 +7,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
-    name: Node.js ${{ matrix.node-version }} - ${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com/
-      - name: Run npm clean install
-        run: npm ci
-      # uncomment when google fix the @google-cloud/logging errors
-      # - name: Run npm security audit
-      #   run: npm audit --production --audit-level=moderate
-      - name: Run npm build
-        run: npm run rollup
-      - name: Archive dist artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: dist
+          node-version: 16
+      - run: npm ci
 
   publish-gpr:
     needs: build
@@ -37,43 +20,16 @@ jobs:
     permissions:
       packages: write
       contents: read
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
-      - name: Download dist artifact
-        uses: actions/download-artifact@v3
+      - uses: actions/setup-node@v3
         with:
-          name: dist
-          path: dist
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: PRINT ENV RELEASE_VERSION
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
-      - name: Setup Git credentials
-        run: |
-          git config --global user.email "rimitola@gmail.com"
-          git config --global user.name "Ricardo Imitola"
-      - name: npm version and publish
-        run: |
-          npm version ${{ env.RELEASE_VERSION }} --allow-same-version
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: bump package.json version
-        run: |
-          git fetch
-          git checkout main
-          npm version ${{ env.RELEASE_VERSION }} --allow-same-version
-          git push -u origin main
+      - run: npm ci
+      - run: |
+          echo "@username:registry=https://npm.pkg.github.com" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

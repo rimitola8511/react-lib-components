@@ -1,17 +1,23 @@
 import React from 'react';
-import { Box, Button, CircularProgress } from '@mui/material';
-import { ILoadingButton } from './types';
+import { Box, Button, ButtonOwnProps, CircularProgress } from '@mui/material';
 
-function LoadingButton({
+interface ILoadingButton {
+  variant?: 'contained' | 'text' | 'outlined';
+  color?: ButtonOwnProps['color'],
+  isLoading?: boolean;
+  label: string;
+  onClick?: () => void;
+}
+
+function LoadingButton ({
   variant = 'contained',
-  isLoading,
-  isDisabled,
-  buttonLabel,
-  submittingLabel = '...Procesando',
+  isLoading = false,
+  color,
+  label,
   ...props
 }: ILoadingButton) {
   return (
-    <Button variant={variant} disabled={isDisabled} {...props}>
+    <Button variant={variant} disabled={isLoading} {...props} sx={{ letterSpacing: 0.4 }} color={color}>
       {isLoading ? (
         <Box
           component="span"
@@ -21,15 +27,15 @@ function LoadingButton({
             gap: 2,
           }}
         >
+          {label}
           <CircularProgress
             variant="indeterminate"
             size={15}
             sx={{ color: 'secondary.dark' }}
           />
-          {submittingLabel}
         </Box>
       ) : (
-        buttonLabel
+        label
       )}
     </Button>
   );

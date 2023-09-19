@@ -30,12 +30,14 @@ jobs:
       # - name: Run npm security audit
       #   run: npm audit --production --audit-level=moderate
 
-      - name: Build storybook
-        run: |
-          npm run build-storybook
-          npm run deploy-storybook
-        env:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run npm build
         run: npm run rollup
+
+      - name: Build storybook
+        run: npm run build-storybook
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static

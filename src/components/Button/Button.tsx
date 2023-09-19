@@ -1,11 +1,7 @@
-import React from 'react';
-import { FC, ReactNode } from 'react';
+import React  from 'react';
+import { IButton } from './types';
 
-interface Props {
-  children: ReactNode | ReactNode[];
-}
-
-const Button: FC<Props> = ({ children, ...props }) => {
+const Button = ({ children, ...props }: IButton) => {
   return <button {...props}>{children}</button>;
 };
 

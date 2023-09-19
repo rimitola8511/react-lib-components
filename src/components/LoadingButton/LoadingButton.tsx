@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Box, Button, CircularProgress } from '@mui/material';
 import { ILoadingButton } from './types';
 
-function LoadingButton({
+function LoadingButton ({
   variant = 'contained',
   isLoading,
   isDisabled,

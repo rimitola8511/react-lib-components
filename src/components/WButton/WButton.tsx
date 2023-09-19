@@ -3,21 +3,30 @@ import { Box, Button, ButtonOwnProps, CircularProgress } from '@mui/material';
 
 interface ILoadingButton {
   variant?: 'contained' | 'text' | 'outlined';
-  color?: ButtonOwnProps['color'],
+  color?: ButtonOwnProps['color'];
+  size?: ButtonOwnProps['size'];
   isLoading?: boolean;
   label: string;
   onClick?: () => void;
 }
 
-function LoadingButton ({
+function LoadingButton({
   variant = 'contained',
   isLoading = false,
   color,
+  size,
   label,
   ...props
 }: ILoadingButton) {
   return (
-    <Button variant={variant} disabled={isLoading} {...props} sx={{ letterSpacing: 0.4 }} color={color}>
+    <Button
+      variant={variant}
+      disabled={isLoading}
+      {...props}
+      sx={{ letterSpacing: 0.4 }}
+      color={color}
+      size={size}
+    >
       {isLoading ? (
         <Box
           component="span"

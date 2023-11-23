@@ -9,7 +9,7 @@
   "description": "An example component library for react /learning",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",

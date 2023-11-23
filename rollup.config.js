@@ -22,7 +22,6 @@ export default {
     // NEW
     typescript({
       tsconfig: 'tsconfig.json',
-      useTsconfigDeclarationDir: true,
     }),
     peerDepsExternal(),
 

@@ -1,7 +1,7 @@
 name: On Build
 
 on:
-  merge:
+  pull_request:
     branches: [main]
 
 jobs:

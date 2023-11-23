@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 
-export const lightTheme = createTheme({
+const LightTheme = createTheme({
   typography: {
     allVariants: { fontFamily: 'Montserrat, sans-serif' },
     h1: {
@@ -27,3 +27,5 @@ export const lightTheme = createTheme({
     },
   },
 });
+
+export default LightTheme;

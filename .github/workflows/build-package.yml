@@ -31,4 +31,4 @@ jobs:
       #   run: npm audit --production --audit-level=moderate
 
       - name: Run npm build
-        run: npm run rollup
+        run: npm run build

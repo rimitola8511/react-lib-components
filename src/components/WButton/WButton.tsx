@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, ButtonOwnProps, CircularProgress } from '@mui/material';
 
 interface ILoadingButton {
-  variant?: 'contained' | 'text' | 'outlined';
+  variant?: ButtonOwnProps['variant'];
   color?: ButtonOwnProps['color'];
   size?: ButtonOwnProps['size'];
   isLoading?: boolean;
@@ -20,9 +20,9 @@ function LoadingButton({
 }: ILoadingButton) {
   return (
     <Button
+      {...props}
       variant={variant}
       disabled={isLoading}
-      {...props}
       sx={{ letterSpacing: 0.4 }}
       color={color}
       size={size}

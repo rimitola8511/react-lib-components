@@ -1,6 +1,7 @@
 {
   "homepage": "https://@rimitola8511.github.io/react-lib-components",
   "name": "@rimitola8511/react-lib-components",
+  "repository": "git://github.com/rimitola8511/react-lib-components",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/rimitola8511"
   },

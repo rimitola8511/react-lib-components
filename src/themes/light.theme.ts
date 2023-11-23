@@ -3,7 +3,7 @@ import { grey } from '@mui/material/colors';
 
 export const lightTheme = createTheme({
   typography: {
-    fontFamily: 'Montserrat, sans-serif',
+    allVariants: { fontFamily: 'Montserrat, sans-serif' },
     h1: {
       fontSize: '38px',
       fontWeight: 400,

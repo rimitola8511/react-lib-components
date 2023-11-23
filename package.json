@@ -5,12 +5,12 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/rimitola8511"
   },
-  "version": "0.1.11-alpha",
+  "version": "0.1.12-beta",
   "description": "An example component library for react /learning",
-  "main": "dist/src/index.js",
+  "main": "dist/types/src/index.js",
   "module": "dist/index.js",
   "source": "src/index.ts",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/types/src/index.d.ts",
   "files": [
     "dist/"
   ],

@@ -1,34 +1,35 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import image from '@rollup/plugin-image';
+import svgr from '@svgr/rollup';
+import del from 'rollup-plugin-delete';
+import external from 'rollup-plugin-peer-deps-external';
+import pkg from './package.json';
 import typescript from '@rollup/plugin-typescript';
-import dts from 'rollup-plugin-dts';
-
-//NEW
-import terser from '@rollup/plugin-terser';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-
-const packageJson = require('./package.json');
 
 export default {
-  input: 'src/index.ts',
+  input: pkg.source,
   output: [
-    {
-      file: packageJson.main,
-      format: 'esm',
-      sourcemap: true,
-    },
+    { file: pkg.main, format: 'cjs' },
+    { file: pkg.module, format: 'esm' },
   ],
   plugins: [
-    // NEW
-    typescript({
-      tsconfig: 'tsconfig.json',
+    external(),
+    image(),
+    svgr(),
+    babel({
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
     }),
-    peerDepsExternal(),
-
-    resolve(),
-    commonjs(),
-
-    // NEW
-    terser(),
+    del({ targets: ['dist/*'] }),
+    typescript(),
   ],
+  external: Object.keys(pkg.peerDependencies || {}),
+  jest: {
+    preset: 'rollup-jest',
+  },
+  jest: {
+    transform: {
+      '\\.m?js$': 'rollup-jest',
+    },
+  },
 };

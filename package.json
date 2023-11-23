@@ -5,19 +5,12 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/rimitola8511"
   },
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "An example component library for react /learning",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/",
-    "src/",
-    "lib/",
-    "index.js",
-    "package.json"
-  ],
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
     "storybook": "storybook dev -p 6006",
